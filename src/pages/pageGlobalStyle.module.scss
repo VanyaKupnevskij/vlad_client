@@ -6,6 +6,8 @@
   flex-direction: column;
   width: 100%;
   max-width: calc(100% - 248px);
+  
+  font-family: $second_font;
 
   &_inner {
     display: grid;
@@ -15,6 +17,8 @@
     flex-grow: 1;
     overflow-y: auto;
     overflow-x: hidden;
+
+    font-family: $second_font;
   }
 
   .title {

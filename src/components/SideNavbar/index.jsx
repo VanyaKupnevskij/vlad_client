@@ -2,56 +2,31 @@ import styles from './style.module.scss';
 
 import IconLink from '../../ui/IconLink';
 import {
-  GraphicIcon,
-  WorkersIcon,
-  RecordsIcon,
-  GeneralIcon,
-  ProjectsIcon,
-  ContactsIcon,
-  HomeIcon,
+  StatisticIcon,
+  ClientsIcon,
+  OrdersIcon,
+  CategoriesIcon,
+  ProductsIcon
 } from '../../ui/Icon';
 
 function SideNavbar({ currentTab }) {
   return (
     <div className={styles.side_navbar}>
-      <IconLink linkPath="/home" icon={<HomeIcon />} isActive={currentTab === 'home'}>
-        Головна
+      <IconLink linkPath="/clients" icon={<ClientsIcon />} isActive={currentTab === 'clients'}>
+        Кліенти
       </IconLink>
-      <IconLink linkPath="/contacts" icon={<ContactsIcon />} isActive={currentTab === 'contacts'}>
-        Контакти
+      <IconLink linkPath="/products" icon={<ProductsIcon />} isActive={currentTab === 'products'}>
+        Продукти
       </IconLink>
-      <IconLink
-        linkPath="/projects"
-        icon={<ProjectsIcon />}
-        isActive={currentTab === 'projects'}>
-        Проекти
+      <IconLink linkPath="/orders" icon={<OrdersIcon />} isActive={currentTab === 'orders'}>
+        Замовлення
       </IconLink>
-      <h4>Деталі</h4>
-      <IconLink
-        linkPath="/general"
-        icon={<GeneralIcon />}
-        isActive={currentTab === 'general'}>
-        Основне
+      <IconLink linkPath="/categories" icon={<CategoriesIcon />} isActive={currentTab === 'categories'}>
+        Категорії
       </IconLink>
-      <IconLink
-        linkPath="/records"
-        icon={<RecordsIcon />}
-        isActive={currentTab === 'records'}>
-        Записи
+      <IconLink linkPath="/statistic" icon={<StatisticIcon />} isActive={currentTab === 'statistic'}>
+        Статистика
       </IconLink>
-      <IconLink
-        linkPath="/workers"
-        icon={<WorkersIcon />}
-        isActive={currentTab === 'workers'}>
-        Працівники
-      </IconLink>
-      <IconLink
-        linkPath="/graphics"
-        icon={<GraphicIcon />}
-        isActive={currentTab === 'graphics'}>
-        Графіки
-      </IconLink>
-
     </div>
   );
 }

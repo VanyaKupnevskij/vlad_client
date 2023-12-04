@@ -1,13 +1,10 @@
 import styles from './style.module.scss';
 
-import logoutImage from '../images/logout.svg';
-import graphicImage from '../images/graphic.svg';
-import workersImage from '../images/workers.svg';
-import recordsImage from '../images/records.svg';
-import generalImage from '../images/general.svg';
-import projectsImage from '../images/projects.svg';
-import contactsImage from '../images/contacts.svg';
-import homeImage from '../images/home.svg';
+import statisticImage from '../images/statistic.svg';
+import clientsImage from '../images/clients.svg';
+import ordersImage from '../images/orders.svg';
+import categoriesImage from '../images/categories.svg';
+import productsImage from '../images/products.svg';
 
 function Icon({ width, height, style, className = '', src }) {
   const _className = `${styles.root} ${className}`;
@@ -15,59 +12,40 @@ function Icon({ width, height, style, className = '', src }) {
   return <img className={_className} style={style} src={src} width={width} height={height} alt='img'/>;
 }
 
-function LogoutIcon({ width, height, style, className = '' }) {
+function StatisticIcon({ width, height, style, className = '' }) {
   return (
-    <Icon style={style} className={className} width={width} height={height} src={logoutImage} />
+    <Icon style={style} className={className} width={width} height={height} src={statisticImage} />
   );
 }
 
-function GraphicIcon({ width, height, style, className = '' }) {
+function ClientsIcon({ width, height, style, className = '' }) {
   return (
-    <Icon style={style} className={className} width={width} height={height} src={graphicImage} />
+    <Icon style={style} className={className} width={width} height={height} src={clientsImage} />
   );
 }
 
-function WorkersIcon({ width, height, style, className = '' }) {
+function OrdersIcon({ width, height, style, className = '' }) {
   return (
-    <Icon style={style} className={className} width={width} height={height} src={workersImage} />
+    <Icon style={style} className={className} width={width} height={height} src={ordersImage} />
   );
 }
 
-function RecordsIcon({ width, height, style, className = '' }) {
+function CategoriesIcon({ width, height, style, className = '' }) {
   return (
-    <Icon style={style} className={className} width={width} height={height} src={recordsImage} />
+    <Icon style={style} className={className} width={width} height={height} src={categoriesImage} />
   );
 }
 
-function GeneralIcon({ width, height, style, className = '' }) {
+function ProductsIcon({ width, height, style, className = '' }) {
   return (
-    <Icon style={style} className={className} width={width} height={height} src={generalImage} />
+    <Icon style={style} className={className} width={width} height={height} src={productsImage} />
   );
-}
-
-function ProjectsIcon({ width, height, style, className = '' }) {
-  return (
-    <Icon style={style} className={className} width={width} height={height} src={projectsImage} />
-  );
-}
-
-function ContactsIcon({ width, height, style, className = '' }) {
-  return (
-    <Icon style={style} className={className} width={width} height={height} src={contactsImage} />
-  );
-}
-
-function HomeIcon({ width, height, style, className }) {
-  return <Icon style={style} className={className} width={width} height={height} src={homeImage} />;
 }
 
 export {
-  LogoutIcon,
-  GraphicIcon,
-  WorkersIcon,
-  RecordsIcon,
-  GeneralIcon,
-  ProjectsIcon,
-  ContactsIcon,
-  HomeIcon,
+  StatisticIcon,
+  ClientsIcon,
+  OrdersIcon,
+  CategoriesIcon,
+  ProductsIcon
 };

@@ -7,7 +7,7 @@ function ClientsPage() {
   return (
     <div className={globalStyles.container}>
       <div className={globalStyles.inner}>
-        <SideNavbar currentTab="general" />
+        <SideNavbar currentTab="clients" />
 
         <div className={pageGlobalStyles.content}>
           <h1 className={pageGlobalStyles.title}>Кліенти</h1>
