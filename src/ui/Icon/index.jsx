@@ -5,6 +5,8 @@ import clientsImage from '../images/clients.svg';
 import ordersImage from '../images/orders.svg';
 import categoriesImage from '../images/categories.svg';
 import productsImage from '../images/products.svg';
+import deleteImage from '../images/delete.svg';
+import newImage from '../images/new.svg';
 
 function Icon({ width, height, style, className = '', src }) {
   const _className = `${styles.root} ${className}`;
@@ -42,10 +44,24 @@ function ProductsIcon({ width, height, style, className = '' }) {
   );
 }
 
+function DeleteIcon({ width, height, style, className = '' }) {
+  return (
+    <Icon style={style} className={className} width={width} height={height} src={deleteImage} />
+  );
+}
+
+function NewIcon({ width, height, style, className = '' }) {
+  return (
+    <Icon style={style} className={className} width={width} height={height} src={newImage} />
+  );
+}
+
 export {
   StatisticIcon,
   ClientsIcon,
   OrdersIcon,
   CategoriesIcon,
-  ProductsIcon
+  ProductsIcon,
+  DeleteIcon,
+  NewIcon
 };
