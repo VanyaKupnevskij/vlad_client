@@ -10,15 +10,29 @@ import { DeleteIcon, NewIcon } from '../../ui/Icon';
 
 function ClientsPage() {
   const [clients, setClients] = useState([]);
+  const [search, setSearch] = useState('');
+  const [typeSearch, setTypeSearch] = useState(0);
   const { request } = useHttp();
 
   const getData = useCallback(async () => {
-    let responseData = await request({
-      url: 'clients/getall'
-    })
+    let responseData = null;
+
+    if(search === '') {
+      responseData = await request({
+        url: 'clients/getall'
+      })
+    } else {
+      responseData = await request({
+        url: 'clients/GetByFilter',
+        params: {
+          typeFilter: typeSearch,
+          filterValue: search
+        }
+      })
+    }
 
     setClients(responseData);
-  }, [request])
+  }, [request, search, typeSearch])
 
   const updateClient = async (client) => {
     await request({
@@ -30,8 +44,11 @@ function ClientsPage() {
   
   const deleteClient = async (id) => {
     await request({
-      url: 'clients/delete?id=' + id,
-      method: 'delete'
+      url: 'clients/delete',
+      method: 'delete',
+      params: {
+        id: id
+      }
     })
   }
   
@@ -76,6 +93,18 @@ function ClientsPage() {
     await getData();
   }
 
+  function handleSearchChange(newValue) { 
+    setSearch(newValue);
+
+    getData();
+  }
+  
+  function handleTypeSearchChange(newValue) { 
+    setTypeSearch(newValue);
+
+    getData();
+  }
+
   return (
     <div className={globalStyles.container}>
       <div className={globalStyles.inner}>
@@ -84,6 +113,22 @@ function ClientsPage() {
         <div className={pageGlobalStyles.content}>
           <h1 className={pageGlobalStyles.title}>Кліенти</h1>
           <div className={pageGlobalStyles.content_inner}>
+            <div className={styles.searcher}>
+              <select 
+                name="search"
+                value={typeSearch}
+                onChange={(e) => handleTypeSearchChange(e.currentTarget.value)}>
+                <option value="0">Ім'я</option>
+                <option value="1">Прізвище</option>
+                <option value="2">Пошта</option>
+                <option value="3">Номер</option>
+              </select>
+              <input 
+                type="text" 
+                value={search}
+                onChange={(e) => handleSearchChange(e.currentTarget.value)}/>
+            </div>
+
             <button className={styles.button_new_client}
               onClick={handleCreateClient}>
               <NewIcon />
@@ -99,53 +144,60 @@ function ClientsPage() {
               <span className={styles.cell + " " + styles.head_title}><DeleteIcon/></span>
 
               {
-                clients.map((client, ind) => {
-                  return (
-                    <>
-                      <input key={client.id + 1} 
-                        className={styles.cell + " " + styles.input}
-                        type='text'
-                        name='id'
-                        value={client.id}/>
-                      <input key={client.id + 2} 
-                        className={styles.cell + " " + styles.input}
-                        type='text'
-                        name='firstName'
-                        value={client.firstName}
-                        onChange={(e) => handleInputChange(ind, client, 'firstName', e.currentTarget.value)}/>
-                      <input key={client.id + 3} 
-                        className={styles.cell + " " + styles.input}
-                        type='text'
-                        name='lastName'
-                        value={client.lastName}
-                        onChange={(e) => handleInputChange(ind, client, 'lastName', e.currentTarget.value)}/>
-                      <input key={client.id + 4} 
-                        className={styles.cell + " " + styles.input}
-                        type='text'
-                        name='email'
-                        value={client.email}
-                        onChange={(e) => handleInputChange(ind, client, 'email', e.currentTarget.value)}/>
-                      <input key={client.id + 5} 
-                        className={styles.cell + " " + styles.input}
-                        type='text'
-                        name='phone'
-                        value={client.phone}
-                        onChange={(e) => handleInputChange(ind, client, 'phone', e.currentTarget.value)}/>
-                      <input key={client.id + 6} 
-                        className={styles.cell + " " + styles.checkbox}
-                        type='checkbox'
-                        name='isAdmin'
-                        checked={client.isAdmin}
-                        onChange={(e) => handleInputChange(ind, client, 'isAdmin', e.currentTarget.checked)}/>
-                      
-                      <button key={client.id + 7} 
-                        className={styles.cell + " " + styles.delete_button}
-                        onClick={() => handleDelete(client)}> 
-                        <DeleteIcon className={styles.delete_icon}/>
-                      </button>
-                    </>
-                  )
-                })
+                (clients === undefined ||
+                clients === null ||
+                clients.length === 0) ? 
+                  <div className={styles.message_nothing}>
+                    Нічого не найдено!
+                  </div> 
+                  :
+                  clients.map((client, ind) => {
+                    return (
+                      <>
+                        <input key={client.id + 1} 
+                          className={styles.cell + " " + styles.input}
+                          type='text'
+                          name='id'
+                          value={client.id}/>
+                        <input key={client.id + 2} 
+                          className={styles.cell + " " + styles.input}
+                          type='text'
+                          name='firstName'
+                          value={client.firstName}
+                          onChange={(e) => handleInputChange(ind, client, 'firstName', e.currentTarget.value)}/>
+                        <input key={client.id + 3} 
+                          className={styles.cell + " " + styles.input}
+                          type='text'
+                          name='lastName'
+                          value={client.lastName}
+                          onChange={(e) => handleInputChange(ind, client, 'lastName', e.currentTarget.value)}/>
+                        <input key={client.id + 4} 
+                          className={styles.cell + " " + styles.input}
+                          type='text'
+                          name='email'
+                          value={client.email}
+                          onChange={(e) => handleInputChange(ind, client, 'email', e.currentTarget.value)}/>
+                        <input key={client.id + 5} 
+                          className={styles.cell + " " + styles.input}
+                          type='text'
+                          name='phone'
+                          value={client.phone}
+                          onChange={(e) => handleInputChange(ind, client, 'phone', e.currentTarget.value)}/>
+                        <input key={client.id + 6} 
+                          className={styles.cell + " " + styles.checkbox}
+                          type='checkbox'
+                          name='isAdmin'
+                          checked={client.isAdmin}
+                          onChange={(e) => handleInputChange(ind, client, 'isAdmin', e.currentTarget.checked)}/>
+                        
+                        <button key={client.id + 7} 
+                          className={styles.cell + " " + styles.delete_button}
+                          onClick={() => handleDelete(client)}> 
+                          <DeleteIcon className={styles.delete_icon}/>
+                        </button>
+                      </>
+                    )
+                  })
               }
             </div>
           </div>

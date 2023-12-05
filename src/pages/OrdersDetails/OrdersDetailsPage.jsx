@@ -40,8 +40,11 @@ function OrdersDetailsPage() {
   
   const deleteOrderDetails = async (id) => {
     await request({
-      url: 'orderdetails/delete?id=' + id,
-      method: 'delete'
+      url: 'orderdetails/delete',
+      method: 'delete',
+      params: {
+        id: id
+      }
     })
   }
   

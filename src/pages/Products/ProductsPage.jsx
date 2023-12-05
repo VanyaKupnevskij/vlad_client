@@ -35,8 +35,11 @@ function ProductsPage() {
   
   const deleteProduct = async (id) => {
     await request({
-      url: 'product/delete?id=' + id,
-      method: 'delete'
+      url: 'product/delete',
+      method: 'delete',
+      params: {
+        id: id
+      }
     })
   }
   

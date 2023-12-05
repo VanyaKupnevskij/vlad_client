@@ -35,8 +35,11 @@ function OrdersPage() {
   
   const deleteOrder = async (id) => {
     await request({
-      url: 'order/delete?id=' + id,
-      method: 'delete'
+      url: 'order/delete',
+      method: 'delete',
+      params: {
+        id: id
+      }
     })
   }
   

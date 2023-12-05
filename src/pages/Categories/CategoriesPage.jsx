@@ -10,15 +10,27 @@ import { DeleteIcon, NewIcon } from '../../ui/Icon';
 
 function CategoriesPage() {
   const [categories, setCategories] = useState([]);
+  const [search, setSearch] = useState('');
   const { request } = useHttp();
 
   const getData = useCallback(async () => {
-    let responseData = await request({
-      url: 'categories/getall'
-    })
+    let responseData = null;
+
+    if(search === '') {
+      responseData = await request({
+        url: 'categories/getall'
+      })
+    } else {
+      responseData = await request({
+        url: 'categories/GetByName',
+        params: {
+          name: search,
+        }
+      })
+    }
 
     setCategories(responseData);
-  }, [request])
+  }, [request, search])
 
   const updateCategory = async (category) => {
     await request({
@@ -30,8 +42,11 @@ function CategoriesPage() {
   
   const deleteCategories = async (id) => {
     await request({
-      url: 'categories/delete?id=' + id,
-      method: 'delete'
+      url: 'categories/delete',
+      method: 'delete',
+      params: {
+        id: id
+      }
     })
   }
   
@@ -72,6 +87,12 @@ function CategoriesPage() {
     await getData();
   }
 
+  function handleSearchChange(newValue) { 
+    setSearch(newValue);
+
+    getData();
+  }
+
   return (
     <div className={globalStyles.container}>
       <div className={globalStyles.inner}>
@@ -80,6 +101,13 @@ function CategoriesPage() {
         <div className={pageGlobalStyles.content}>
           <h1 className={pageGlobalStyles.title}>Категорії</h1>
           <div className={pageGlobalStyles.content_inner}>
+            <div className={styles.searcher}>
+              <input 
+                type="text" 
+                value={search}
+                onChange={(e) => handleSearchChange(e.currentTarget.value)}/>
+            </div>
+
             <button className={styles.button_new_category}
               onClick={handleCreateCategory}>
               <NewIcon />
@@ -91,29 +119,36 @@ function CategoriesPage() {
               <span className={styles.cell + " " + styles.head_title}><DeleteIcon/></span>
 
               {
-                categories.map((category, ind) => {
-                  return (
-                    <>
-                      <input key={category.id + 1} 
-                        className={styles.cell + " " + styles.input}
-                        type='text'
-                        name='id'
-                        value={category.id}/>
-                      <input key={category.id + 2} 
-                        className={styles.cell + " " + styles.input}
-                        type='text'
-                        name='name'
-                        value={category.name}
-                        onChange={(e) => handleInputChange(ind, category, 'name', e.currentTarget.value)}/>
-                      
-                      <button key={category.id + 3} 
-                        className={styles.cell + " " + styles.delete_button}
-                        onClick={() => handleDelete(category)}> 
-                        <DeleteIcon className={styles.delete_icon}/>
-                      </button>
-                    </>
-                  )
-                })
+                (categories === undefined ||
+                categories === null ||
+                categories.length === 0) ? 
+                  <div className={styles.message_nothing}>
+                    Нічого не найдено!
+                  </div> 
+                  :
+                  categories.map((category, ind) => {
+                    return (
+                      <>
+                        <input key={category.id + 1} 
+                          className={styles.cell + " " + styles.input}
+                          type='text'
+                          name='id'
+                          value={category.id}/>
+                        <input key={category.id + 2} 
+                          className={styles.cell + " " + styles.input}
+                          type='text'
+                          name='name'
+                          value={category.name}
+                          onChange={(e) => handleInputChange(ind, category, 'name', e.currentTarget.value)}/>
+                        
+                        <button key={category.id + 3} 
+                          className={styles.cell + " " + styles.delete_button}
+                          onClick={() => handleDelete(category)}> 
+                          <DeleteIcon className={styles.delete_icon}/>
+                        </button>
+                      </>
+                    )
+                  })
               }
             </div>
           </div>
