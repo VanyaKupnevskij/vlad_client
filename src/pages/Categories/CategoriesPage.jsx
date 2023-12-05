@@ -59,8 +59,6 @@ function CategoriesPage() {
     let tempCategories = categories.filter(it => it.id !== category.id);
     setCategories(tempCategories);
 
-    console.log(categories);
-
     deleteCategories(category.id);
   }
 

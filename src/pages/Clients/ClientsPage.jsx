@@ -59,8 +59,6 @@ function ClientsPage() {
     let tempClients = clients.filter(it => it.id !== client.id);
     setClients(tempClients);
 
-    console.log(clients);
-
     deleteClient(client.id);
   }
 
