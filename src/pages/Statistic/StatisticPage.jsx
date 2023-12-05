@@ -84,7 +84,7 @@ function StatisticPage() {
     },
     data: [
       {
-        yValueFormatString: '#,### грн',
+        yValueFormatString: '#,### разів',
         xValueFormatString: 'YY.MMM.DD',
         showInLegend: true,
         legendText: 'Замовлення',
