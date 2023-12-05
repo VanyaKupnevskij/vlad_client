@@ -73,7 +73,7 @@ function OrdersPage() {
   async function handleCreateOrder() {
     let newOrder = {
       id: 0, 
-      date: new Date(),
+      orderDate: new Date(Date.now()),
       totalAmount: 0,
       clientID: 2,
     };
