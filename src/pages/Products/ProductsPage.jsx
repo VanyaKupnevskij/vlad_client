@@ -18,7 +18,7 @@ function ProductsPage() {
       url: 'product/getall'
     })
     let responseCategories = await request({
-      url: 'categories/getall'
+      url: 'categories/getsorted'
     })
 
     setProducts(responseProducts);
@@ -143,7 +143,7 @@ function ProductsPage() {
                         }
                       </select>
                       
-                      <button key={product.id + 7} 
+                      <button key={product.id + 6} 
                         className={styles.cell + " " + styles.delete_button}
                         onClick={() => handleDelete(product)}> 
                         <DeleteIcon className={styles.delete_icon}/>

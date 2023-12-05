@@ -3,6 +3,7 @@ import styles from './style.module.scss';
 import statisticImage from '../images/statistic.svg';
 import clientsImage from '../images/clients.svg';
 import ordersImage from '../images/orders.svg';
+import ordersDetailsImage from '../images/orderDetails.svg';
 import categoriesImage from '../images/categories.svg';
 import productsImage from '../images/products.svg';
 import deleteImage from '../images/delete.svg';
@@ -29,6 +30,12 @@ function ClientsIcon({ width, height, style, className = '' }) {
 function OrdersIcon({ width, height, style, className = '' }) {
   return (
     <Icon style={style} className={className} width={width} height={height} src={ordersImage} />
+  );
+}
+
+function OrdersDetailsIcon({ width, height, style, className = '' }) {
+  return (
+    <Icon style={style} className={className} width={width} height={height} src={ordersDetailsImage} />
   );
 }
 
@@ -60,6 +67,7 @@ export {
   StatisticIcon,
   ClientsIcon,
   OrdersIcon,
+  OrdersDetailsIcon,
   CategoriesIcon,
   ProductsIcon,
   DeleteIcon,

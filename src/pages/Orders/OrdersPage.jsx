@@ -108,19 +108,19 @@ function OrdersPage() {
                         type='text'
                         name='id'
                         value={order.id}/>
-                      <input key={order.id + 3} 
+                      <input key={order.id + 2} 
                         className={styles.cell + " " + styles.input}
                         type='datetime-local'
                         name='orderDate'
                         value={order.orderDate}
                         onChange={(e) => handleInputChange(ind, order, 'orderDate', e.currentTarget.value)}/>
-                      <input key={order.id + 4} 
+                      <input key={order.id + 3} 
                         className={styles.cell + " " + styles.input}
                         type='number'
                         name='totalAmount'
                         value={order.totalAmount}
                         onChange={(e) => handleInputChange(ind, order, 'totalAmount', e.currentTarget.value)}/>
-                      <select key={order.id + 5} 
+                      <select key={order.id + 4} 
                         name="clientID"
                         className={styles.cell + " " + styles.input}
                         value={order.clientID}
@@ -135,7 +135,7 @@ function OrdersPage() {
                         }
                       </select>
                       
-                      <button key={order.id + 7} 
+                      <button key={order.id + 5} 
                         className={styles.cell + " " + styles.delete_button}
                         onClick={() => handleDelete(order)}> 
                         <DeleteIcon className={styles.delete_icon}/>

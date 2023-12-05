@@ -106,7 +106,7 @@ function CategoriesPage() {
                         value={category.name}
                         onChange={(e) => handleInputChange(ind, category, 'name', e.currentTarget.value)}/>
                       
-                      <button key={category.id + 7} 
+                      <button key={category.id + 3} 
                         className={styles.cell + " " + styles.delete_button}
                         onClick={() => handleDelete(category)}> 
                         <DeleteIcon className={styles.delete_icon}/>

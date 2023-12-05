@@ -5,6 +5,7 @@ import {
   StatisticIcon,
   ClientsIcon,
   OrdersIcon,
+  OrdersDetailsIcon,
   CategoriesIcon,
   ProductsIcon
 } from '../../ui/Icon';
@@ -20,6 +21,9 @@ function SideNavbar({ currentTab }) {
       </IconLink>
       <IconLink linkPath="/orders" icon={<OrdersIcon />} isActive={currentTab === 'orders'}>
         Замовлення
+      </IconLink>
+      <IconLink linkPath="/ordersdetails" icon={<OrdersDetailsIcon />} isActive={currentTab === 'ordersDetails'}>
+        Деталі замовлення
       </IconLink>
       <IconLink linkPath="/categories" icon={<CategoriesIcon />} isActive={currentTab === 'categories'}>
         Категорії
